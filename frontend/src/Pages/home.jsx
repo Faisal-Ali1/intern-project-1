@@ -1,7 +1,17 @@
+import Navbar from '../Components/common/navbar'
+import HeroSection from '../Components/hero';
+import Main from '../Components/main';
+
 function HomePage(){
     return(
         <>
-        Home page
+        <div className='px-15'>
+           
+        <Navbar />
+        <HeroSection/>
+        <Main/>
+      
+        </div>
         </>
     )
 }

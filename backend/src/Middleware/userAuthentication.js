@@ -8,13 +8,13 @@ const user_auth = async(req , res , next) => {
         if(!token)
             return res.status(400).send('token is missing');
 
-        console.log(token);
+        // console.log(token);
         
         const payload = jwt.verify(token , process.env.JWT_PRIVATE_KEY);
         // console.log(decode);
 
         const { _id } = payload;
-        console.log(payload);
+        // console.log(payload);
         
 
         const userData = await user.findById(_id);

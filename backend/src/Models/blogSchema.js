@@ -6,10 +6,12 @@ const blogSchema = new Schema({
         type: String,
         required: true,
         minlength: 2,
-        maxLength: 50
+        maxLength: 50,
+        trim: true
     },
     discription: {
         type: String,
+        trim: true
     },
     blog_body: {
         type: String,

@@ -7,14 +7,10 @@ const user_auth = async(req , res , next) => {
         
         if(!token)
             return res.status(400).send('token is missing');
-
-        // console.log(token);
         
         const payload = jwt.verify(token , process.env.JWT_PRIVATE_KEY);
-        // console.log(decode);
 
         const { _id } = payload;
-        // console.log(payload);
         
 
         const userData = await user.findById(_id);
@@ -23,11 +19,6 @@ const user_auth = async(req , res , next) => {
             return res.status(400).send('invalid user');
 
         req.result = userData;
-
-
-
-
-
 
         next();
         

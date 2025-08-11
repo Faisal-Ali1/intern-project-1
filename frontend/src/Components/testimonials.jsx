@@ -1,6 +1,6 @@
-function LatestBlog(){
+function Testimonials(){
 
-    const arr = new Array(10).fill(1);
+        const arr = new Array(10).fill(1);
     console.log(arr);
 
     return(
@@ -8,7 +8,7 @@ function LatestBlog(){
             <div className="my-30">
 
                 {/* heading */}
-                    <h2 className="text-4xl font-bold mb-7">Latest blogs</h2>
+                    <h2 className="text-4xl font-bold mb-7">Testimonials</h2>
 
                     {/* latest-blogs */}
                     <div className="  flex overflow-x-auto gap-3">
@@ -21,6 +21,7 @@ function LatestBlog(){
                 </div>
         </>
     )
+        
 }
 
-export default LatestBlog;
+export default Testimonials;

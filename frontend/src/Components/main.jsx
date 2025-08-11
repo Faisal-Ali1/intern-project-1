@@ -1,5 +1,8 @@
 import LatestBlog from "./latestBlogs";
 import { NavLink } from "react-router";
+import Testimonials from '../Components/testimonials';
+import Footer from "./common/footer";
+
 
 function Main() {
 
@@ -37,6 +40,12 @@ function Main() {
                         <NavLink className=" text-white text-center w-40 py-3 bg-black rounded-3xl mt-5  font-semibold skeleton">Get Started</NavLink>
                     </div>
                 </div>
+
+                {/* testimonials */}
+                    <Testimonials/>
+
+                {/* Footer */}
+                    <Footer/>
             </div>
         </>
     )

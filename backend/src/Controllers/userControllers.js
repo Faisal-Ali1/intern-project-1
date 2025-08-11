@@ -1,4 +1,3 @@
-const validator = require('validator');
 const bcrypt = require('bcrypt');
 const user = require('../Models/userSchema');
 const jwt = require('jsonwebtoken');
@@ -11,29 +10,7 @@ const registerUser = async (req, res) => {
     if (!req?.body?.username)
       return res.status(400).send('username is missing');
 
-    // checking email is present or not
-    if (!req?.body?.email)
-      return res.status(400).send('email is missing');
-
-    // checking password is present or not
-    if (!req?.body?.password)
-      return res.status(400).send('password is missing');
-
-
-    const { username, email, password, } = req?.body;
-
-    // checking its valid email or not
-    if (!validator.isEmail(email))
-      return res.status(400).send('invilid email');
-
-
-    // checking password length
-    if (!password.length >= 5)
-      return res.status(400).send('weakPassword');
-
-    // checking password strength
-    if (!validator.isStrongPassword(password))
-      return res.status(400).send('weak password use(@ , A , a , 1) in your password');
+    const {  password } = req?.body;
 
     // hashing password
     req.body.password = await bcrypt.hash(password, 10);
@@ -49,11 +26,7 @@ const registerUser = async (req, res) => {
 }
 const loginUser = async (req, res) => {
   try {
-    if (!req.body?.email)
-      return res.status(400).send('email is missing');
-
-    if (!req?.body?.password)
-      return res.status(400).send('password is missing');
+    
 
     const { email, password } = req?.body;
 
@@ -70,8 +43,8 @@ const loginUser = async (req, res) => {
     const token = jwt.sign({ _id: userData._id, username: userData.username, email: userData.email }, process.env.JWT_PRIVATE_KEY, { expiresIn: "10h" });
 
     res.cookie('token', token , {
-      httpOnly: true,
-      sameSite: "strict",
+      // httpOnly: true,
+      // sameSite: "strict",
       maxAge: 1000 * 60 * 60 * 10  // 10hrs
     });
 
@@ -132,8 +105,6 @@ const logoutUser = async (req , res) => {
       res.status(400).send(`Error: ${err.message}`);
     }
 }
-// use redis for cookie
-
 const deleteUser = async (req , res) => {
     try{
        const userData = await user.findByIdAndDelete( req.result._id );
@@ -148,7 +119,7 @@ const deleteUser = async (req , res) => {
     }
 }
 
-
+// use redis for cookie
 
 
 module.exports = { registerUser, loginUser, updateUserProfile, logoutUser, deleteUser };

@@ -5,11 +5,16 @@ const blogRouter = require('./Routes/blogRoute')
 const cookieParser = require('cookie-parser')
 require('dotenv').config({quiet: true});
 const client = require('./config/redis.js');
+const cors = require('cors');
 const PORT = 3000;
 
 // console.log(process.env);
 
 const app = express();
+ app.use(cors({
+    origin: `http://localhost:5173`,
+    credentials: true
+ }))
 
 app.use(express.json());
 app.use(cookieParser());

@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const user = require('../Models/userSchema');
 const jwt = require('jsonwebtoken');
+const client = require('../config/redis')
 
 
 const registerUser = async (req, res) => {
@@ -27,7 +28,6 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     
-
     const { email, password } = req?.body;
 
     const userData = await user.findOne({ email });
@@ -40,13 +40,9 @@ const loginUser = async (req, res) => {
     if (!isTrue)
       return res.status(400).send('invilid Credintial');
 
-    const token = jwt.sign({ _id: userData._id, username: userData.username, email: userData.email }, process.env.JWT_PRIVATE_KEY, { expiresIn: "10h" });
+    const token = jwt.sign({ _id: userData?._id, username: userData?.username, email: userData?.email }, process.env.JWT_PRIVATE_KEY, { expiresIn: "10h" });
 
-    res.cookie('token', token , {
-      // httpOnly: true,
-      // sameSite: "strict",
-      maxAge: 1000 * 60 * 60 * 10  // 10hrs
-    });
+    res.cookie('token', token , { maxAge: 1000 * 60 * 60 * 10 }); //10hrs
 
     res.status(200).send("logged in sucessfully ");
 
@@ -95,9 +91,19 @@ const updateUserProfile = async (req, res) => {
 const logoutUser = async (req , res) => {
     try{
         const {token} = req.cookies;
-        // console.log(token);
+
+        // decoding JWT token
+        const payload = jwt.decode(token);
 
         res.cookie('token' , null , {expires: new Date(Date.now())})
+
+        // add token to redis
+        client.set(`token:${token}` , 'expired');
+
+        // adding expire time of token in redis
+        client.expire(`token:${token}` , payload.exp);
+        
+
         res.send('logged out sucessfully');
         
     }
@@ -118,8 +124,5 @@ const deleteUser = async (req , res) => {
       res.status(400).send(`Error: ${err.message}`);
     }
 }
-
-// use redis for cookie
-
 
 module.exports = { registerUser, loginUser, updateUserProfile, logoutUser, deleteUser };

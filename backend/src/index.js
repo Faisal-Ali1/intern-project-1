@@ -4,7 +4,10 @@ const userRouter = require('./Routes/userRoute');
 const blogRouter = require('./Routes/blogRoute')
 const cookieParser = require('cookie-parser')
 require('dotenv').config({quiet: true});
+const client = require('./config/redis.js');
 const PORT = 3000;
+
+// console.log(process.env);
 
 const app = express();
 
@@ -19,8 +22,15 @@ async function initialConnection() {
 
     try {
         await main();
-        console.log('connected to db');
+        console.log('connected to mongoDb');
 
+        await client.connect();
+        console.log('connected to redisDb');
+
+        // await Promise.all([ main() , client.connect()]);
+        // console.log('connected to both db');
+        
+        
 
         app.listen(PORT, () => {
             console.log(`listning at port no: ${PORT}`);
@@ -28,7 +38,7 @@ async function initialConnection() {
         });
     }
     catch (err) {
-        console.log('Error: ', err.message);
+        console.log(`Errors: ${err}` );
 
     }
 

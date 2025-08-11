@@ -9,6 +9,7 @@ function Navbar(){
     
     return(
         
+        
             <div className=" flex justify-between items-center px-20">
 
                 {/* logo */}

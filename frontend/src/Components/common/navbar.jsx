@@ -8,7 +8,7 @@ function Navbar(){
     console.log(currentTab);
     
     return(
-        
+
         
             <div className=" flex justify-between items-center px-20">
 
@@ -32,8 +32,8 @@ function Navbar(){
 
                 {/* login/profile */}
                 <div className="font-semibold">
-                    <NavLink className="hover:text-red-500">Login</NavLink>
-                    <NavLink className="bg-gray-700 text-white px-5 py-3 hover:bg-black rounded-3xl ml-4">Get Started</NavLink>
+                    <NavLink to='/login' className="hover:text-red-500">Login</NavLink>
+                    <NavLink to='/signup' className="bg-gray-700 text-white px-5 py-3 hover:bg-black rounded-3xl ml-4">Get Started</NavLink>
                 </div>
             </div>
         

@@ -1,19 +1,31 @@
-import { NavLink } from "react-router";
+import { useState } from "react";
+import { NavLink , useLocation} from "react-router";
 
 function Navbar(){
+
+    const location = useLocation()
+    const [ currentTab , setCurrentTab ] = useState(location.pathname || 'home');
+    console.log(currentTab);
+    
     return(
         
-            <div className=" flex justify-between items-center">
+            <div className=" flex justify-between items-center px-20">
 
                 {/* logo */}
                 <img src="./Images/logo.png" alt="logo"
                 className="h-30"/>
 
                 {/* Navbar-links */}
-                <div className=" w-100 flex text-[#333333] bg-blue-200 font-sans justify-between items-center text-xl rounded-2xl px-10 pb-2 ">
-                    <a href="" className="hover:text-white">Home</a>
-                    <a href="" className="hover:text-white bg-orange-300 px-4 py-2 rounded-b-3xl">Blogs</a>
-                    <a href="" className="hover:text-white ">CreateBlog</a>
+                <div className=" w-150 flex text-[#333333] bg-blue-200 font-sans justify-between items-center text-xl rounded-2xl px-10 pb-2 ">
+                    
+                    {/* Home */}
+                    <NavLink to={'/'} className={`hover:text-white  w-40 text-center font-semibold ${currentTab === '/'?"bg-orange-300 px-4 py-2 rounded-b-3xl text-white":""}`}><button onClick={() => setCurrentTab(location?.pathname)}>Home</button></NavLink>
+
+                    {/* Blogs */}
+                    <NavLink to={'/blog'} className={`hover:text-white  w-40 text-center font-semibold ${currentTab === '/blog'?"bg-orange-300 px-4 py-2 rounded-b-3xl text-white":""}`}><button onClick= {() => setCurrentTab(location?.pathname)}>Blogs</button></NavLink>
+
+                    {/* createBlog */}
+                    <NavLink to={'/createblog'}  className={`hover:text-white w-40 text-center font-semibold ${currentTab === '/createblog'?"bg-orange-300 px-4 py-2 rounded-b-3xl text-white":""}`}><button onClick= {() => setCurrentTab(location?.pathname)}>CreateBlog</button></NavLink>
                     
                 </div>
 

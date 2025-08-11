@@ -1,7 +1,7 @@
 function LatestBlog(){
 
     const arr = new Array(10).fill(1);
-    console.log(arr);
+    // console.log(arr);
 
     return(
         <>

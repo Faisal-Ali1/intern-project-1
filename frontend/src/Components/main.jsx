@@ -44,9 +44,9 @@ function Main() {
                 {/* testimonials */}
                     <Testimonials/>
 
-                {/* Footer */}
-                    <Footer/>
+                
             </div>
+        
         </>
     )
 }

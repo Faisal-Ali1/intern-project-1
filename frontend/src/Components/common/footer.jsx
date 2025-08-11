@@ -1,7 +1,7 @@
 function Footer(){
     return(
         <>
-        <div className="h-30 bg-black">
+        <div className="h-100 bg-black">
 
         </div>
         </>

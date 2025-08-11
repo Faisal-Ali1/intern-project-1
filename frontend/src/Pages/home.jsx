@@ -1,18 +1,17 @@
-import Navbar from '../Components/common/navbar'
 import HeroSection from '../Components/hero';
 import Main from '../Components/main';
-import Testimonials from '../Components/testimonials';
+import Footer from '../Components/common/footer';
 
-function HomePage(){
-    return(
+
+function HomePage() {
+    return (
         <>
-        <div className='px-15'>
-           
-        <Navbar />
-        <HeroSection/>
-        <Main/>
-      
-        </div>
+            <div className='px-15'>
+
+                <HeroSection />
+                <Main />
+            </div>
+            
         </>
     )
 }

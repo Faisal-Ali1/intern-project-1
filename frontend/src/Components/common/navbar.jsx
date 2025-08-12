@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { useSelector } from "react-redux";
+import ProfileHover from "../profileHover";
 
 function Navbar() {
 
@@ -8,14 +9,16 @@ function Navbar() {
     const [currentTab, setCurrentTab] = useState(location.pathname || 'home');
     console.log(currentTab);
 
-    const { isAuthenticated } = useSelector((state) => state.auth);
+    const { isAuthenticated, user } = useSelector((state) => state.auth);
+    console.log('user: ', user);
+
 
     return (
         <>
             {
                 // if user has logged in then show navbar else not
                 isAuthenticated ? (
-                    <div className=" flex justify-between items-center px-20">
+                    <div className=" flex justify-between items-center px-20 border">
 
                         {/* logo */}
                         <img src="./Images/logo.png" alt="logo"
@@ -36,10 +39,15 @@ function Navbar() {
                         </div>
 
                         {/* login/profile */}
-                        <div className="font-semibold">
-                            <NavLink to='/login' className="hover:text-red-500">Login</NavLink>
-                            <NavLink to='/signup' className="bg-gray-700 text-white px-5 py-3 hover:bg-black rounded-3xl ml-4">Get Started</NavLink>
-                        </div>
+                        {
+                            isAuthenticated ? (<button onClick={() => console.log('hllo world')}> <ProfileHover /> </button>)
+                                : (
+                                    <div className="font-semibold border">
+                                        <NavLink to='/login' className="hover:text-red-500">Login</NavLink>
+                                        <NavLink to='/signup' className="bg-gray-700 text-white px-5 py-3 hover:bg-black rounded-3xl ml-4">Get Started</NavLink>
+                                    </div>
+                                )
+                        }
                     </div>
                 ) : ''
             }

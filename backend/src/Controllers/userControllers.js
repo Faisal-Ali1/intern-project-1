@@ -11,7 +11,7 @@ const registerUser = async (req, res) => {
     if (!req?.body?.username)
       return res.status(400).send('username is missing');
 
-    const {  password } = req?.body;
+    const { password } = req?.body;
 
     // hashing password
     req.body.password = await bcrypt.hash(password, 10);
@@ -27,7 +27,14 @@ const registerUser = async (req, res) => {
 }
 const loginUser = async (req, res) => {
   try {
-    
+
+    if (!req?.body?.email)
+      return res.status(400).send('email missing');
+
+    if (!req?.body?.password)
+      return res.status(400).send('password missing');
+
+
     const { email, password } = req?.body;
 
     const userData = await user.findOne({ email });
@@ -42,7 +49,7 @@ const loginUser = async (req, res) => {
 
     const token = jwt.sign({ _id: userData?._id, username: userData?.username, email: userData?.email }, process.env.JWT_PRIVATE_KEY, { expiresIn: "10h" });
 
-    res.cookie('token', token , { maxAge: 1000 * 60 * 60 * 10 }); //10hrs
+    res.cookie('token', token, { maxAge: 1000 * 60 * 60 * 10 }); //10hrs
 
     res.status(200).send("logged in sucessfully ");
 
@@ -88,59 +95,58 @@ const updateUserProfile = async (req, res) => {
     res.status(400).send(`Error: ${err.message}`)
   }
 }
-const logoutUser = async (req , res) => {
-    try{
-        const {token} = req.cookies;
+const logoutUser = async (req, res) => {
+  try {
+    const { token } = req.cookies;
 
-        // decoding JWT token
-        const payload = jwt.decode(token);
+    // decoding JWT token
+    const payload = jwt.decode(token);
 
-        res.cookie('token' , null , {expires: new Date(Date.now())})
+    res.cookie('token', null, { expires: new Date(Date.now()) })
 
-        // add token to redis
-        client.set(`token:${token}` , 'expired');
+    // add token to redis
+    client.set(`token:${token}`, 'expired');
 
-        // adding expire time of token in redis
-        client.expire(`token:${token}` , payload.exp);
-        
+    // adding expire time of token in redis
+    client.expire(`token:${token}`, payload.exp);
 
-        res.send('logged out sucessfully');
-        
-    }
-    catch(err){
-      res.status(400).send(`Error: ${err.message}`);
-    }
-}
-const deleteUser = async (req , res) => {
-    try{
-       const userData = await user.findByIdAndDelete( req.result._id );
 
-        res.status(200).json({
-          message: 'user deleted sucessfully',
-          userData
-        });
-    }
-    catch(err){
-      res.status(400).send(`Error: ${err.message}`);
-    }
-}
-const userCheck = async (req , res) => {
-  try{
-    
-
-      const reply = {
-        _id:req.result._id,
-        username : req.result.username,
-        email : req.result.email
-      }
-
-      res.status(200).json({
-        user: reply,
-        message: 'valid user'
-      });
+    res.send('logged out sucessfully');
 
   }
-  catch(err){
+  catch (err) {
+    res.status(400).send(`Error: ${err.message}`);
+  }
+}
+const deleteUser = async (req, res) => {
+  try {
+    const userData = await user.findByIdAndDelete(req.result._id);
+
+    res.status(200).json({
+      message: 'user deleted sucessfully',
+      userData
+    });
+  }
+  catch (err) {
+    res.status(400).send(`Error: ${err.message}`);
+  }
+}
+const userCheck = async (req, res) => {
+  try {
+
+    const reply = {
+      _id: req.result._id,
+      username: req.result.username,
+      email: req.result.email
+    }
+
+    res.status(200).json({
+      user: reply,
+      message: 'valid user'
+    });
+
+  }
+  catch (err) {
     res.status(400).send(`Error: ${err.message}`)
   }
 }

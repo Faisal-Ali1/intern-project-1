@@ -3,7 +3,7 @@ const validator = require('validator');
 const user_validate = (req, res, next) => {
 
   try {
-    if (!req.body?.email)
+    if (!req?.body?.email)
       return res.status(400).send('email is missing');
 
     if (!validator.isEmail(req?.body?.email)) {
@@ -14,14 +14,29 @@ const user_validate = (req, res, next) => {
     if (!req?.body?.password)
       return res.status(400).send('password is missing');
 
-    if (!req?.body?.password.length >= 5)
-      return res.status(400).send('weak Password');
 
-     if (!validator.isStrongPassword(req?.body?.password))
-      return res.status(400).send('weak password');
+    if (!req?.body?.password.length >= 5) {
+      if (req.originalUrl === '/user/login') {
+
+        return res.status(400).send('invalid Credential');
+      }
+
+      else
+        return res.status(400).send('weak Password');
+    }
+
+    if (req.originalUrl === '/user/login') {
+      if (!validator.isStrongPassword(req?.body?.password))
+        return res.status(400).send('invalid Credential');
+    }
+    else{
+      if (!validator.isStrongPassword(req?.body?.password))
+        return res.status(400).send('weak password');
+    }
 
 
-     next();
+
+    next();
   }
   catch (err) {
     return res.status(400).send(`Error: ${err.message}`);

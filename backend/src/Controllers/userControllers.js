@@ -51,7 +51,16 @@ const loginUser = async (req, res) => {
 
     res.cookie('token', token, { maxAge: 1000 * 60 * 60 * 10 }); //10hrs
 
-    res.status(200).send("logged in sucessfully ");
+    const reply = {
+      username : userData?.username,
+      email: userData?.email,
+
+    }
+
+    res.status(200).json({
+      data: reply,
+      message: "logged in sucessfully "
+    });
 
   }
   catch (err) {

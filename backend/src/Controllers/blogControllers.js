@@ -27,7 +27,12 @@ const createBlog = async (req, res) => {
 }
 const getAllBlog = async (req, res) => {
     try {
-        const data = await blog.find({});
+
+        const page = req.query.page;
+        const limit = 10
+        
+        // fetching data in set of 10
+        const data = await blog.find({}).skip((page-1)* limit).limit(limit);
         res.status(200).send(data);
     }
     catch (err) {

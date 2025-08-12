@@ -29,7 +29,7 @@ const user_validate = (req, res, next) => {
       if (!validator.isStrongPassword(req?.body?.password))
         return res.status(400).send('invalid Credential');
     }
-    else{
+    else {
       if (!validator.isStrongPassword(req?.body?.password))
         return res.status(400).send('weak password');
     }

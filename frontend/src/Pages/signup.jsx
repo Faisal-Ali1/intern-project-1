@@ -1,13 +1,29 @@
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router";
+import { Navigate, NavLink, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../authSlice";
+// import { checkAuth } from "../authSlice";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function SignUpPage(){
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
      const { register, handleSubmit, formState: { errors } } = useForm()
+
+     const { isAuthenticated} = useSelector(state => state.auth);
 
     const submitData = (data) => {
         console.log(data);
+        dispatch(registerUser(data));
+        
     }
+
+    useEffect(()=>{
+        if(isAuthenticated)
+            navigate('/');
+    }, [isAuthenticated]);
 
     return(
         <>
@@ -17,7 +33,7 @@ function SignUpPage(){
                 
                                         {/* username */}
                                         <div className='flex flex-col gap-1'>
-                                            <label className='label'>UserName</label>
+                                            <label className='label font-semibold'>UserName</label>
                                             <input
                                                 type="text"
                                                 className='input w-80'
@@ -28,7 +44,7 @@ function SignUpPage(){
 
                                         {/* Email */}
                                         <div className='flex flex-col gap-1'>
-                                            <label className='label'>Email</label>
+                                            <label className='label font-semibold'>Email</label>
                                             <input
                                                 type="email"
                                                 className='input w-80'
@@ -39,13 +55,13 @@ function SignUpPage(){
                 
                                         {/* Password */}
                                         <div className='flex flex-col gap-1'>
-                                            <label className='label'>password</label>
+                                            <label className='label font-semibold'>password</label>
                                             <input
                                                 type="password"
                                                 className='input w-80'
-                                                placeholder='***'
+                                                placeholder='********'
                                                 required = {true}
-                                                {...register('Password', { required: true })} />
+                                                {...register('password', { required: true })} />
                                         </div>
                 
                                         {/* submit button */}

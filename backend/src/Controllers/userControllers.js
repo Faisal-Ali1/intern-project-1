@@ -124,5 +124,25 @@ const deleteUser = async (req , res) => {
       res.status(400).send(`Error: ${err.message}`);
     }
 }
+const userCheck = async (req , res) => {
+  try{
+    
 
-module.exports = { registerUser, loginUser, updateUserProfile, logoutUser, deleteUser };
+      const reply = {
+        _id:req.result._id,
+        username : req.result.username,
+        email : req.result.email
+      }
+
+      res.status(200).json({
+        user: reply,
+        message: 'valid user'
+      });
+
+  }
+  catch(err){
+    res.status(400).send(`Error: ${err.message}`)
+  }
+}
+
+module.exports = { registerUser, loginUser, updateUserProfile, logoutUser, deleteUser, userCheck };

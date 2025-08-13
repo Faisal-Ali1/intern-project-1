@@ -15,7 +15,7 @@ function SignUpPage(){
      const { isAuthenticated} = useSelector(state => state.auth);
 
     const submitData = (data) => {
-        console.log(data);
+        // console.log(data);
         dispatch(registerUser(data));
         
     }

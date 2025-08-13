@@ -18,7 +18,6 @@ export const loginUser = createAsyncThunk(
     'auth/login',
     async (Credential, { rejectWithValue }) => {
         try {
-            console.log('credentials: ', Credential);
 
             const response = await axiosClient.post('/user/login', Credential);
 
@@ -34,8 +33,8 @@ export const checkAuth = createAsyncThunk(
     'auth/check',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axiosClient.get('/user/check');
-            console.log(res.data);
+            const response = await axiosClient.get('/user/check' );
+    
 
             return response.data;
         }
@@ -101,7 +100,7 @@ const authSlice = createSlice({
             .addCase(checkAuth.fulfilled, (state, action) => {
                 state.loading = false
                 state.user = action.payload
-                state.isAuthenticated = !!action.payload
+                state.isAuthenticated = true
                 state.error = null
             })
             .addCase(checkAuth.rejected, (state, action) => {

@@ -60,7 +60,7 @@ function BlogPage() {
                 <div className='flex flex-wrap gap-2 justify-center border'>
                     {
                         blog?.map((item, idx) => (
-                            <div className='border rounded-2xl p-2 flex-none bg-amber-200'>
+                            <div key={idx} className='border rounded-2xl p-2 flex-none bg-amber-200'>
                                 <div className='border rounded-t-2xl bg-white overflow-hidden'>
                                 <img src="/Images/boyWithBook.png" className='h-50' alt="" />
                                 </div>

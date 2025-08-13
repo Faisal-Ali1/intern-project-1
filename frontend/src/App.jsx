@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import LoginPage from "./Pages/login";
 import SignUpPage from "./Pages/signup";
 import HomePage from "./Pages/home";
@@ -14,13 +14,12 @@ import { checkAuth } from "./authSlice";
 
 function App() {
 
-  const { user , isAuthenticated} = useSelector((state)=> state.auth);
+  const { isAuthenticated} = useSelector((state)=> state.auth);
 
-  console.log(isAuthenticated);
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch(checkAuth);
+    dispatch(checkAuth());
   }, []);
   
 

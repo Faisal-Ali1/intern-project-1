@@ -15,19 +15,13 @@ function LoginPage() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
 
+    // handling user data
     const submitData = (data) => {
-        console.log(data);
         dispatch(loginUser(data));
         
     }
-    console.log('Error:' , error?.response?.data);
-
-    // useEffect(()=>{
-    //     if(error?.response?.data)
-    //         alert(error?.response?.data);
-    // }, [error])
     
-console.log( 'isAuth: ' , isAuthenticated);
+console.log(isAuthenticated);
 
     useEffect(() => {
         if (isAuthenticated)

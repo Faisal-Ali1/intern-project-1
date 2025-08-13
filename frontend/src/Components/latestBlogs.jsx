@@ -7,9 +7,9 @@ function LatestBlog() {
             <div className="my-30">
 
                 {/* heading */}
-                <h2 className="text-4xl font-bold mb-7 text-center">Latest blogs</h2>
+                <h2 className="text-5xl font-bold mb-10 text-center">Latest blogs</h2>
 
-                {/* blogs-Car */}
+                {/* blogs-Carousel */}
                 <div className="  flex overflow-x-auto gap-3">
                     <BlogCarousel/>
                 </div>

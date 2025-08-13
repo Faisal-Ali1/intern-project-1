@@ -10,7 +10,7 @@ function HomePage() {
     const navigate = useNavigate();
     const { isAuthenticated} = useSelector(state => state.auth);
 
-    console.log(isAuthenticated);
+    // console.log(isAuthenticated);
     
 
     useEffect(()=>{

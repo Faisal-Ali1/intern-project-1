@@ -10,11 +10,14 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkAuth } from "./authSlice";
+import Blog_details from "./Components/blog_details";
 
 
 function App() {
 
   const { isAuthenticated} = useSelector((state)=> state.auth);
+  // console.log('HideNavbar: ', hideNavBar);
+
 
   const dispatch = useDispatch();
 
@@ -27,7 +30,7 @@ function App() {
     <>
       
       
-      <Navbar/>
+       {isAuthenticated &&  <Navbar/>}
 
         <Routes>
           <Route path="/" element={ isAuthenticated ? <HomePage /> : <Navigate to={'/login'}/>}></Route>
@@ -39,6 +42,8 @@ function App() {
           <Route path="/blog" element={ isAuthenticated? <BlogPage/>: <Navigate to={'/login'}/>}></Route>
 
           <Route path="/createblog" element={isAuthenticated? <CreateBlog/> : <Navigate to={'/login'}/>}></Route>
+          
+          <Route path="/blogdetails/:blogId" element={<Blog_details/>}></Route>
         </Routes>
       <Footer />
 

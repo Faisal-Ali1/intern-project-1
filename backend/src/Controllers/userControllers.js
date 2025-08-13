@@ -149,6 +149,9 @@ const userCheck = async (req, res) => {
       email: req.result.email
     }
 
+    // console.log('working');
+    
+
     res.status(200).json({
       user: reply,
       message: 'valid user'

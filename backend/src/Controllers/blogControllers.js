@@ -39,6 +39,16 @@ const getAllBlog = async (req, res) => {
         res.status(400).send(`Error: ${err.message}`);
     }
 }
+const getLatestBlog = async (req , res) => {
+    try{
+        const latestBlog = await blog.find({}).limit(10);
+        res.status(200).send(latestBlog);
+    }
+    catch(err){
+        res.status(400).send(`Error: ${err.message}`)
+    }
+}
+
 const getBlogById = async (req, res) => {
     try {
 
@@ -106,4 +116,4 @@ const deleteblog = async (req, res) => {
     }
 }
 
-module.exports = { createBlog, getAllBlog, getBlogById, updateBlog, deleteblog };
+module.exports = { createBlog, getAllBlog, getLatestBlog, getBlogById, updateBlog, deleteblog };

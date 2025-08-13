@@ -50,7 +50,7 @@ function BlogPage() {
 
     return (
         <>
-            <div className='mt-10 mb-30'>
+            <div className='pt-35 mb-30'>
                 
                 {/* title */}
                 <div>
@@ -58,7 +58,7 @@ function BlogPage() {
                 </div>
 
                 {/* displaying blogs on the screen */}
-                <div className='flex flex-wrap gap-2 justify-center border'>
+                <div className='flex flex-wrap gap-2 justify-center'>
                     {
                         blog?.map((item, idx) => (
                             <div key={idx} className='border rounded-2xl p-2 flex-none bg-amber-200 cursor-pointer'>

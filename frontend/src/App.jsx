@@ -15,7 +15,7 @@ import Blog_details from "./Components/blog_details";
 
 function App() {
 
-  const { isAuthenticated} = useSelector((state)=> state.auth);
+  const { isAuthenticated, loading} = useSelector((state)=> state.auth);
   // console.log('HideNavbar: ', hideNavBar);
 
 
@@ -24,13 +24,25 @@ function App() {
   useEffect(()=>{
     dispatch(checkAuth());
   }, []);
+
+  // add loading while when data is loading
+  if(loading){
+        return(
+            <>
+            <div className=' flex items-center justify-center text-5xl h-[100vh]'>
+                <span className="loading loading-spinner loading-xs"></span>
+            </div>
+            </>
+        )
+    }
   
 
   return (
     <>
       
-      
+    
        {isAuthenticated &&  <Navbar/>}
+
 
         <Routes>
           <Route path="/" element={ isAuthenticated ? <HomePage /> : <Navigate to={'/login'}/>}></Route>

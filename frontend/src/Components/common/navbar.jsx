@@ -17,12 +17,12 @@ function Navbar() {
   // Hide navbar when not authenticated and viewing blog details
 
   return (
-    <div className="flex justify-between items-center px-20">
+    <div className="flex justify-between items-center px-20 bg-white fixed w-full z-11 shadow-2xl">
       {/* Logo */}
-      <img src="./Images/logo.png" alt="logo" className="h-30" />
+      <img src="./Images/logo.png" alt="logo" className="h-20" />
 
       {/* Navbar links */}
-      <div className="w-150 flex text-[#333333] bg-blue-200 font-sans justify-between items-center text-xl rounded-2xl px-10 pb-2">
+      <div className="w-150 flex text-[#333333] bg-blue-200 font-sans justify-between items-center text-xl rounded-2xl px-10 pb-2 h-13">
         {/* Home */}
         <NavLink
           to="/"

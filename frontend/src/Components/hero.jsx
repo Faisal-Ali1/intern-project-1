@@ -1,7 +1,7 @@
 function HeroSection() {
     return (
         <>
-            <div className="grid grid-cols-2 mt-15">
+            <div className="grid grid-cols-2 p-18">
 
                 {/* heading */}
                 <div className=" flex flex-col gap-8 items-center py-35 ">
@@ -22,6 +22,7 @@ function HeroSection() {
                     <img src="./Images/header_img.png" alt="img" className="h-120 object-contain " />
                 </div>
             </div>
+            
         </>
     )
 }

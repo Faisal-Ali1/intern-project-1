@@ -7,9 +7,9 @@ const auth_user = require('../Middleware/userAuthentication');
 const blogRouter = express.Router();
 
 blogRouter.post('/createblog',user_auth, createBlog);
-blogRouter.get('/getallblogs', user_auth , getAllBlog);
-blogRouter.get('/latestblog' , user_auth, getLatestBlog);
-blogRouter.get('/getblog/:id' , auth_user, getBlogById);
+blogRouter.get('/getallblogs' , getAllBlog);
+blogRouter.get('/latestblog'  , getLatestBlog);
+blogRouter.get('/getblog/:id' , getBlogById);
 blogRouter.patch('/updateblog/:id' ,auth_user, updateBlog);
 blogRouter.delete('/deleteblog/:id' ,auth_user, deleteblog);
 

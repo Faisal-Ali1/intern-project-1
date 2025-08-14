@@ -48,7 +48,6 @@ const getLatestBlog = async (req , res) => {
         res.status(400).send(`Error: ${err.message}`)
     }
 }
-
 const getBlogById = async (req, res) => {
     try {
 

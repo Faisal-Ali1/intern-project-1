@@ -2,6 +2,7 @@ import axios from 'axios';
 import axiosClient from '../Utils/axiosClient';
 import { useState, useEffect } from 'react';
 import Blog_details from '../Components/blog_details';
+import { NavLink } from 'react-router';
 
 function BlogPage() {
 
@@ -61,14 +62,14 @@ function BlogPage() {
                 <div className='flex flex-wrap gap-2 justify-center'>
                     {
                         blog?.map((item, idx) => (
-                            <div key={idx} className='border rounded-2xl p-2 flex-none bg-amber-200 cursor-pointer'>
+                            <NavLink to={`/blogdetails/${item._id}`} key={idx} className='border rounded-2xl p-2 flex-none bg-amber-200 cursor-pointer'>
                                 <div className='border rounded-t-2xl bg-white overflow-hidden'>
                                 <img src="/Images/boyWithBook.png" className='h-50' alt="" />
                                 </div>
                                 <h2 className='font-bold text-xl'>{item?.title}</h2>
                                 <p>{item?.blog_body}</p>
                                 <button className='text-blue-600'>Read more...</button>
-                            </div>
+                            </NavLink>
                         ))
                     }
                 </div>
@@ -83,6 +84,7 @@ function BlogPage() {
                         disabled={(page === 0 ? true : false)}>
                         prev
                     </button>
+                    <p className='font-semibold'>Page-{page}</p>
 
                     {/* Next button */}
                     <button

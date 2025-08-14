@@ -36,13 +36,11 @@ function App() {
         )
     }
   
-
   return (
     <>
       
     
        {isAuthenticated &&  <Navbar/>}
-
 
         <Routes>
           <Route path="/" element={ isAuthenticated ? <HomePage /> : <Navigate to={'/login'}/>}></Route>

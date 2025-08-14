@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { logoutUser } from "../authSlice";
+import { useDispatch } from "react-redux";
 
 export default function ProfileHover() {
   const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0 });
   const {user} = useSelector(state => state.auth);
+  const [ isClicked , setIsClicked ] = useState(false);
+  const dispatch = useDispatch();
 
   const handleMouseMove = (e) => {
     setTooltip((prev) => ({
@@ -13,6 +17,15 @@ export default function ProfileHover() {
     }));
   };
 
+  const handleLogout = () => {
+    try{
+        dispatch(logoutUser());
+    }
+    catch(err){
+      alert('Error: ' , err.message)
+    }
+  }
+
   return (
     <div className="">
       <div
@@ -20,10 +33,12 @@ export default function ProfileHover() {
           tooltip.visible ? "brightness-75" : "brightness-100"
         }`}
       >
+        <div className="relative" onClick={() => setIsClicked(!isClicked)}>
+
         <img
           src="./Images/profilepic.png"
           alt="Profile"
-          className="rounded-full h-15 cursor-pointer transition duration-300 hover:brightness-75"
+          className="rounded-full h-15 cursor-pointer transition duration-300 hover:brightness-75 "
           onMouseEnter={() =>
             setTooltip((prev) => ({ ...prev, visible: true }))
           }
@@ -32,8 +47,18 @@ export default function ProfileHover() {
             setTooltip((prev) => ({ ...prev, visible: false }))
           }
         />
+
+        {
+          isClicked ? (
+            <ul className="bg-black w-30 rounded text-sm text-start px-2 py-2 absolute right-8 ">
+          <li className="text-white hover:bg-white hover:text-black cursor-pointer pl-1 rounded" onClick={handleLogout}>logout</li>
+        </ul>
+          ) : ''
+        }
+        </div>
       </div>
 
+          {/* show name on hover */}
       {tooltip.visible && (
         <div
           className="absolute bg-black text-white text-sm px-3 py-1 rounded shadow-lg pointer-events-none transition-opacity duration-200"

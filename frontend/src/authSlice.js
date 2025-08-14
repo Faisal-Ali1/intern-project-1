@@ -29,12 +29,26 @@ export const loginUser = createAsyncThunk(
     }
 )
 
+export const logoutUser = createAsyncThunk(
+    'auth/logout',
+    async (_, { rejectWithValue }) => {
+        try {
+            const { data } = await axiosClient.get(`/user/logout`);
+            return data;
+        }
+        catch (err) {
+            return rejectWithValue(err);
+        }
+
+    }
+)
+
 export const checkAuth = createAsyncThunk(
     'auth/check',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axiosClient.get('/user/check' );
-    
+            const response = await axiosClient.get('/user/check');
+
 
             return response.data;
         }
@@ -89,6 +103,24 @@ const authSlice = createSlice({
                     state.error = action.payload
                 state.isAuthenticated = false
                 state.user = null
+            })
+
+            // logout Cases
+            .addCase( logoutUser.pending , (state)=>{
+                state.loading = true
+                state.error = null
+
+            })
+            .addCase( logoutUser.fulfilled , (state)=>{
+                state.loading = false
+                state.user = null
+                state.isAuthenticated = false
+                state.error = null 
+            })
+            .addCase( logoutUser.rejected , (state , action)=>{
+                state.loading = false
+                state.error = action?.payload?.message
+                
             })
 
             // checkAuth Cases

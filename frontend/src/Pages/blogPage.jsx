@@ -1,15 +1,11 @@
-import axios from 'axios';
 import axiosClient from '../Utils/axiosClient';
 import { useState, useEffect } from 'react';
-import Blog_details from '../Components/blog_details';
 import { NavLink } from 'react-router';
 
 function BlogPage() {
 
     const [blog, setBlog] = useState(null);
     const [page, setPage] = useState(1);
-    // console.log(blog );
-    // console.log(page);
 
 
     useEffect(() => {

@@ -21,7 +21,6 @@ function LoginPage() {
 
     }
 
-    console.log(isAuthenticated);
 
     useEffect(() => {
         if (isAuthenticated)

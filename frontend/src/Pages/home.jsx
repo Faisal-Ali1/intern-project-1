@@ -7,17 +7,7 @@ import { useNavigate } from 'react-router';
 
 function HomePage() {
 
-    const navigate = useNavigate();
     const { isAuthenticated } = useSelector(state => state.auth);
-    
-    // console.log(isAuthenticated);
-    
-
-    useEffect(()=>{
-        if(!isAuthenticated)
-            navigate('/login')
-    
-    } , [])
 
     
 

@@ -61,7 +61,7 @@ function Navbar() {
           <ProfileHover />
         </button>
       ) : (
-        <div className="font-semibold border">
+        <div className="font-semibold ">
           <NavLink to="/login" className="hover:text-red-500">
             Login
           </NavLink>

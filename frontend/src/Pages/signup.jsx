@@ -14,10 +14,8 @@ function SignUpPage() {
 
     const submitData = async (datas) => {
         try {
-            console.log(datas);
 
             const { data } = await axiosClient.post('/user/register', datas);
-            console.log(data);
 
             alert(data);
             navigate('/login');

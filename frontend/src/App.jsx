@@ -16,8 +16,6 @@ import Blog_details from "./Components/blog_details";
 function App() {
 
   const { isAuthenticated, loading} = useSelector((state)=> state.auth);
-  // console.log('HideNavbar: ', hideNavBar);
-
 
   const dispatch = useDispatch();
 
@@ -25,7 +23,7 @@ function App() {
     dispatch(checkAuth());
   }, []);
 
-  // add loading while when data is loading
+  // add loading when data is loading
   if(loading){
         return(
             <>
@@ -40,16 +38,16 @@ function App() {
     <>
       
     
-       {isAuthenticated &&  <Navbar/>}
+        <Navbar/>
 
         <Routes>
-          <Route path="/" element={ isAuthenticated ? <HomePage /> : <Navigate to={'/login'}/>}></Route>
+          <Route path="/" element={<HomePage />}></Route>
 
           <Route path="/login" element={isAuthenticated? <Navigate to={'/'}/>:<LoginPage />}></Route>
 
           <Route path="/signup" element={isAuthenticated? <Navigate to={'/'}/>: <SignUpPage />}></Route>
 
-          <Route path="/blog" element={ isAuthenticated? <BlogPage/>: <Navigate to={'/login'}/>}></Route>
+          <Route path="/blog" element={<BlogPage/>}></Route>
 
           <Route path="/createblog" element={isAuthenticated? <CreateBlog/> : <Navigate to={'/login'}/>}></Route>
           

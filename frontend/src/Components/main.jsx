@@ -42,7 +42,7 @@ function Main() {
                             The world is waiting for your words.</p>
 
                         {/* call-to-action */}
-                        <NavLink className=" text-white text-center w-40 py-3 bg-black rounded-3xl mt-5  font-semibold skeleton">Get Started</NavLink>
+                        <NavLink to={'/login'} className=" text-white text-center w-40 py-3 bg-black rounded-3xl mt-5  font-semibold skeleton">Get Started</NavLink>
                     </div>
                 </div>
 

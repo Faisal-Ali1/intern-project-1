@@ -31,6 +31,10 @@ function SignUpPage() {
             navigate('/');
     }, [isAuthenticated]);
 
+    useEffect(()=>{
+        window.scrollTo(0 , 0);
+    }, [])
+
     return (
         <>
             <div className="bg-amber-100 h-[100vh] flex justify-center items-center">

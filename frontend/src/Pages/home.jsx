@@ -9,7 +9,9 @@ function HomePage() {
 
     const { isAuthenticated } = useSelector(state => state.auth);
 
-    
+    useEffect(()=>{
+        window.scrollTo(0 , 0);
+    }, [])
 
     return (
         <>

@@ -7,6 +7,9 @@ function BlogPage() {
     const [blog, setBlog] = useState(null);
     const [page, setPage] = useState(1);
 
+    useEffect(()=>{
+        window.scrollTo(0 , 0);
+    }, [])
 
     useEffect(() => {
         async function fetchBlogs() {

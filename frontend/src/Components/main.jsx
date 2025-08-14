@@ -2,11 +2,11 @@ import LatestBlog from "./latestBlogs";
 import { NavLink } from "react-router";
 import Testimonials from '../Components/testimonials';
 import Footer from "./common/footer";
+import { useEffect } from "react";
+import axiosClient from "../Utils/axiosClient";
 
 
 function Main() {
-
-
 
     return (
         <>

@@ -70,7 +70,7 @@ function SignUpPage() {
                                         message: 'Email must include .com'
                                     }
                                 })} />
-                            {errors.email && <span className="text-red-500 text-sm">invalid email</span>}
+                            {errors.email && <span className="text-red-500 text-sm">{errors?.email?.message}</span>}
                         </div>
 
                         {/* Password */}

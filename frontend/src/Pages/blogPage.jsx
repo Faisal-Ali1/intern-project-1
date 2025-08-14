@@ -7,8 +7,8 @@ function BlogPage() {
     const [blog, setBlog] = useState(null);
     const [page, setPage] = useState(1);
 
-    useEffect(()=>{
-        window.scrollTo(0 , 0);
+    useEffect(() => {
+        window.scrollTo(0, 0);
     }, [])
 
     useEffect(() => {
@@ -29,17 +29,17 @@ function BlogPage() {
     const handlePage = (data) => {
         try {
             if (data === 'incr') {
-                window.scrollTo({ top: 150 , behavior:'smooth'})
+                window.scrollTo({ top: 150, behavior: 'smooth' })
                 setPage((prev) => prev + 1)
-                
+
             }
 
-            if (data === 'decr' && page != 0){
-                window.scrollTo({ top: 150 , behavior:'smooth'})
+            if (data === 'decr' && page != 0) {
+                window.scrollTo({ top: 150, behavior: 'smooth' })
                 setPage((prev) => prev - 1)
-                
+
             }
-                
+
 
         }
         catch (err) {
@@ -51,23 +51,25 @@ function BlogPage() {
     return (
         <>
             <div className='pt-35 mb-30'>
-                
+
                 {/* title */}
-                <div>
-                    <h1 className="text-5xl text-center font-bold mb-10">All Blogs</h1>
+                <div className='text-center mb-20'>
+                    <h1 className="text-5xl  font-bold mb-2">Stories That Spark Ideas</h1>
+                    <p className='text-gray-500 font-semibold'>From tech to travel, lifestyle to learning — find it all here</p>
                 </div>
 
                 {/* displaying blogs on the screen */}
-                <div className='flex flex-wrap gap-2 justify-center'>
+                <div className='flex flex-wrap gap-6 justify-center'>
                     {
                         blog?.map((item, idx) => (
-                            <NavLink to={`/blogdetails/${item._id}`} key={idx} className='border rounded-2xl p-2 flex-none bg-amber-200 cursor-pointer'>
-                                <div className='border rounded-t-2xl bg-white overflow-hidden'>
-                                <img src="/Images/boyWithBook.png" className='h-50' alt="" />
+                            <NavLink to={`/blogdetails/${item._id}`} key={idx} className='shadow-sm rounded-2xl flex-none cursor-pointer pb-4 hover:shadow-2xl hover:translate-0.5 transition duration-300'>
+                                <div className=' rounded-t-2xl bg-white overflow-hidden'>
+                                    <img src="/Images/boyWithBook.png" className='h-80 w-90 object-cover' alt="" />
                                 </div>
-                                <h2 className='font-bold text-xl'>{item?.title}</h2>
-                                <p>{item?.blog_body}</p>
-                                <button className='text-blue-600'>Read more...</button>
+                                <h2 className='font-bold text-2xl text-center mt-3 mb-5'>{item?.title}</h2>
+
+
+                                <button className='text-gray-500 font-semibold text-sm hover:text-blue-500 cursor-pointer ml-4'>Read more →</button>
                             </NavLink>
                         ))
                     }
@@ -89,7 +91,7 @@ function BlogPage() {
                     <button
                         className='btn btn-primary'
                         onClick={() => handlePage('incr')}
-                        disabled={(blog?.length < 10 ? true : false )}>
+                        disabled={(blog?.length < 10 ? true : false)}>
                         next
                     </button>
                 </div>

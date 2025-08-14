@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { useNavigate, NavLink } from 'react-router';
+import { useNavigate, NavLink, useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -10,6 +10,7 @@ function LoginPage() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const { isAuthenticated, error } = useSelector(state => state.auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -31,6 +32,15 @@ function LoginPage() {
             navigate('/');
     }, [isAuthenticated]);
 
+    useEffect(()=>{
+        // Agar user protected route se aaya hai
+        if(location.state?.fromProcted){
+            window.history.pushState(null , '' , window.location.href);
+            window.onpopstate = () => {
+                navigate("/" , { replace:true}); // Back press -> home button
+            }
+        }
+    }, [location , navigate]);
 
     return (
         <>

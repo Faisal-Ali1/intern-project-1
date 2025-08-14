@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkAuth } from "./authSlice";
 import Blog_details from "./Components/blog_details";
+import { useLocation } from "react-router";
 
 
 function App() {
@@ -18,10 +19,17 @@ function App() {
   const { isAuthenticated, loading} = useSelector((state)=> state.auth);
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
+  // checking authentication
   useEffect(()=>{
     dispatch(checkAuth());
   }, []);
+
+
+  const hideNavFooter = ['/login' , '/signup' , '/blogdetails'];
+  const shouldHide = hideNavFooter.includes(location.pathname);
+
 
   // add loading when data is loading
   if(loading){
@@ -36,9 +44,8 @@ function App() {
   
   return (
     <>
-      
     
-        <Navbar/>
+        {!shouldHide && <Navbar/>}
 
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
@@ -49,11 +56,13 @@ function App() {
 
           <Route path="/blog" element={<BlogPage/>}></Route>
 
-          <Route path="/createblog" element={isAuthenticated? <CreateBlog/> : <Navigate to={'/login'}/>}></Route>
+          <Route path="/createblog" element={isAuthenticated? <CreateBlog/> : <Navigate to={'/login'} state={{ fromProtected: true}}/>}></Route>
           
           <Route path="/blogdetails/:blogId" element={<Blog_details/>}></Route>
         </Routes>
-      <Footer />
+
+        
+      { !shouldHide && <Footer />}
 
     </>
   )
